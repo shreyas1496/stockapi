@@ -180,7 +180,7 @@ const summary = async (req, res, { firestore }) => {
             <tr>
             <td>${item.createdTime} ${item.stock.direction}</td>
             <td>${item.stock.tradingsymbol}</td>
-            <td> ${ltpMap[item.ins].last_price} / ${item.stock.orderTriggeredPrice}</td>
+            <td> ${ltpMap[item.ins]?.last_price} / ${item.stock.orderTriggeredPrice}</td>
             <td>${item.tick.ohlc.high} at ${item.stock.highCrossedAt} (${item.stock.high})</td>
             <td>${item.tick.ohlc.low} at ${item.stock.lowCrossedAt} (${item.stock.low})</td>
             </tr>
