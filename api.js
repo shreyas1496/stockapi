@@ -147,8 +147,9 @@ function sortByKey(array, key, order = 'asc') {
 
 
 const summary = async (req, res, { firestore }) => {
+    const [mode, type, date] = req.path.split('/').filter(Boolean);
     const config = await getConfig({firestore});
-    const orders_ss = await firestore.collection(config.ordersTable).where('createdDate', '==', today()).get();
+    const orders_ss = await firestore.collection(config.ordersTable).where('createdDate', '==', date || today()).get();
     const orders = orders_ss.docs
     .map(doc => ({ _id: doc.id, ...doc.data() }))
     .map(doc => ({ ...doc, ins: `${doc?.stock?.exchange|| 'NFO'}:${doc.stock.tradingsymbol}`}));
